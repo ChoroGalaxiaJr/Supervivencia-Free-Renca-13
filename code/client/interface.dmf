@@ -1,0 +1,84 @@
+macro "macro"
+	elem 
+		name = "Any"
+		command = "KeyDown \"[[*]]\""
+	elem 
+		name = "Any+UP"
+		command = "KeyUp \"[[*]]\""
+
+
+window "chat"
+	elem "chat"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "output1"
+		type = OUTPUT
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		text-color = #ffffff
+		background-color = #000000
+		is-default = true
+		saved-params = "max-lines"
+
+window "default"
+	elem "default"
+		type = MAIN
+		pos = 281,0
+		size = 1280x720
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-default = true
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "LA SUPERVIVENCIA FREE RENCA 13"
+		statusbar = false
+		macro = "macro"
+	elem "child1"
+		type = CHILD
+		pos = 0,0
+		size = 1280x720
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #000000
+		saved-params = "splitter"
+		left = "map"
+		right = "chat"
+		is-vert = true
+		splitter = 75
+
+window "map"
+	elem "map"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "map1"
+		type = MAP
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		saved-params = "zoom;letterbox;zoom-mode"
+
