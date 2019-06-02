@@ -72,7 +72,8 @@ client
 				planeY = oldPlaneX * sin(rot) + planeY * cos(rot)
 
 			var/spd = (keys["north"]-keys["south"])*(2+keys["shift"]*2)
-			mob.PixelMove(dirX*spd,dirY*spd)
+			mob.PixelMove(dirX*spd,0)
+			mob.PixelMove(0,dirY*spd)
 
 			mob.dir = FromDegrees((atan2(dirX,dirY)-90)*-1)
 

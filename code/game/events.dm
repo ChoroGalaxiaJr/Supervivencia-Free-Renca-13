@@ -2,7 +2,7 @@
 
 	proc/entire_game_loop()
 		next_track = "silence"
-
+		return
 		/*var/screen/cutscene_object/apple_building = new()
 		apple_building.icon = 'icons/hud/fullscreen.dmi'
 		apple_building.icon_state = "apple"
