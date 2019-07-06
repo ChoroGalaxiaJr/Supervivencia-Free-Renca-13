@@ -61,7 +61,7 @@ client
 		render_raycast()
 
 			//next_track = 'sounds/music/silo.ogg'
-			var/rot = (keys["west"]-keys["east"])*(1+keys["shift"]*0.5)
+			var/rot = (keys["a"]-keys["d"])*(1+keys["shift"]*0.5)
 
 			if(rot != 0)
 				oldDirX = dirX
@@ -71,7 +71,7 @@ client
 				planeX = planeX * cos(rot) - planeY * sin(rot)
 				planeY = oldPlaneX * sin(rot) + planeY * cos(rot)
 
-			var/spd = (keys["north"]-keys["south"])*(2+keys["shift"]*2)
+			var/spd = (keys["w"]-keys["s"])*(2+keys["shift"]*2)
 			mob.PixelMove(dirX*spd,0)
 			mob.PixelMove(0,dirY*spd)
 
@@ -180,8 +180,8 @@ client
 				var/screen/P = client_raycast_screen[x+1]
 				if(P)
 					var/matrix/M = matrix()
-					M.Scale(1,lineHeight)
-					M.Translate(x,240 + (lineHeight*(looking/50)/-2))
+					M.Scale(1,lineHeight*2)
+					M.Translate(x,240 + ((lineHeight*2)*(looking/50)/-4))
 
 					P.transform = M
 					if(!isnull(hit))

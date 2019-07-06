@@ -23,7 +23,7 @@ world/New()
 mob
 	PixelMove(move_x,move_y)
 		move_delay = 0
-		..()
+		return ..()
 
 atom/movable
 	var
@@ -32,7 +32,6 @@ atom/movable
 
 	proc
 		PixelMove(move_x, move_y)
-			..()
 			var
 				whole_x = 0
 				whole_y = 0
@@ -48,7 +47,6 @@ atom/movable
 				sub_step_y -= whole_y
 
 			if(whole_x || whole_y)
-				step_size = max(abs(whole_x), abs(whole_y))
+				//step_size = max(abs(whole_x), abs(whole_y))
 				return Move(loc, dir, step_x + whole_x, step_y + whole_y)
 			return 1
-

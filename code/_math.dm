@@ -38,3 +38,26 @@ proc/distance_pos(var/x_1,var/y_1,var/x_2,var/y_2)
 
 proc/noDivisionError(num)
 	return num == 0 ? 0.0000000001 : num
+
+/proc/hex2num(hex, safe=FALSE)
+	. = 0
+	var/place = 1
+	for(var/i in length(hex) to 1 step -1)
+		var/num = text2ascii(hex, i)
+		switch(num)
+			if(48 to 57)
+				num -= 48	//0-9
+			if(97 to 102)
+				num -= 87	//a-f
+			if(65 to 70)
+				num -= 55	//A-F
+			if(45)
+				return . * -1 // -
+			else
+				if(safe)
+					return null
+				else
+					CRASH("Malformed hex number")
+
+		. += num * place
+		place *= 16

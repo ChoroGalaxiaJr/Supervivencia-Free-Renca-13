@@ -55,6 +55,9 @@
 		camera_x += (mob.Get_Position_X() - camera_x)/50
 		camera_y += (mob.Get_Position_Y() - camera_y)/50
 
+		camera_x = max(304+16, camera_x)
+		camera_y = max(240+16, camera_y)
+
 		var
 			camera_x_t = camera_x
 			camera_y_t = camera_y + (shake_timer != 0 ? ((global_frame_counter % 3)-1)*round(shake_timer/3) : 0)
@@ -84,10 +87,11 @@
 			oldPlaneX = 0
 			planeY = 0.66 //the 2d raycaster version of camera plane
 
-			mob.move_delay = 2-keys["shift"]
-			var/dir = (keys["west"]*WEST) + (keys["east"]*EAST) + (keys["north"]*NORTH) + (keys["south"]*SOUTH)
-			if(dir != 0)
-				mob.Move(get_step(mob,dir),dir)
+			if(istype(mob,/mob/player))
+				mob.move_delay = 2-keys["shift"]
+				var/dire = (keys["a"]*WEST) + (keys["d"]*EAST) + (keys["w"]*NORTH) + (keys["s"]*SOUTH)
+				if(dire != 0 && !mob:MARIO_MODE)
+					mob:MovePlayer(dire)
 
 		else
 

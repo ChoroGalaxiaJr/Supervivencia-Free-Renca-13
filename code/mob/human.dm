@@ -13,18 +13,26 @@
 	size_y = 0.25
 	vMove = -20
 
+	sight = SEE_THRU
+
 
 	New()
 		..()
 		update_body()
+		//initialize mario, also general
+		color_top = rgb(rand(0,255),rand(0,255),rand(0,255))
+		color_bottom = rgb(rand(0,255),rand(0,255),rand(0,255))
 		renderizable += src
 
-	Move()
+		loc = locate(103,145,1)
+
+
+	proc/MovePlayer(var/dir)
 		if(world.time > last_move_delay)
 			last_move_delay = world.time + move_delay
 			var/old_x = Get_Position_X()
 			var/old_y = Get_Position_Y()
-			..()
+			Move(get_step(src,dir),dir,0,0)
 			var/new_x = Get_Position_X()
 			var/new_y = Get_Position_Y()
 
@@ -32,14 +40,41 @@
 			pixel_z = old_y - new_y
 			animate(src, pixel_w = 0, pixel_z = 0, time = move_delay)
 
+	Process()
+		..()
+		if(MARIO_MODE)
+			Mario_Process()
+		else
+			bound_width = 32
+			bound_height = 32
+			bound_x = 0
+			bound_y = 0
+			density = 1
+			transform = matrix()
 
+		if(client)
+			if(client.keys["b"] && !MARIO_MODE)
+				update_colors()
+				MARIO_MODE = 1
+
+		if(client)
+			if(client.keys["c"] && MARIO_MODE)
+				update_body()
+				MARIO_MODE = 0
 
 	proc
+
+		//Rest in peace. logic. :sob:
+		Respawn()
+			update_body()
+			MARIO_MODE = 0
+			loc = locate(2,2,1)
 		/*
 
 		creates a icon of the body.
 
 		*/
+
 
 		update_body()
 			if(src.stand_icon)

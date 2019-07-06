@@ -23,14 +23,16 @@
 		..()
 		density = 0
 
-		PixelMove(x_spd,y_spd)
+		PixelMove(x_spd,0)
+		PixelMove(0,y_spd)
+
 		update_shadow(127)
 
 
 		z_spd = (200+(sin(global_frame_counter)*20)-z_pos)/50
 
 
-		if((global_frame_counter % 200) == 0)
+		if((global_frame_counter % 30) == 0)
 			var/obj/bomb/new_b = new(loc)
 			new_b.step_x = step_x + 16
 			new_b.step_y = step_y + 16
